@@ -1,0 +1,35 @@
+.fieldContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+}
+.label {
+    font-size: 18px;
+}
+.field {
+    height: 50px;
+    background-color: rgb(244, 243, 243);
+    border: 1px solid rgb(197, 197, 197);
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 0 15px;
+}
+.checkboxContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+.error {
+    color: red;
+    position: absolute;
+    bottom: -24px;
+    font-size: 20px;
+}

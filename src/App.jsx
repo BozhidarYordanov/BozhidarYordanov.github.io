@@ -1,8 +1,7 @@
-import DynamicFormBuilder from './components/dynamic-form-builder';
-import formJSON from './formData.json';
+import LandingPage from './components/landing-page';
 
 function App() {
-    return <DynamicFormBuilder formJSON={formJSON} />;
+    return <LandingPage />;
 }
 
 export default App;

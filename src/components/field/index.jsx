@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { styles } from '../../theme/components/field';
+import '../../theme/components/field.css';
 
 const Field = ({
     id = '',
@@ -25,12 +25,12 @@ const Field = ({
     if (type === 'checkbox') {
         return (
             <div>
-                <div style={{ ...styles.checkboxContainer }}>
-                    <label style={{ ...styles.label }} htmlFor={id}>
+                <div className="checkboxContainer">
+                    <label className="label" htmlFor={id}>
                         {label} {required && '*'}
                     </label>
                     <input
-                        style={{ ...styles.checkbox }}
+                        className="checkbox"
                         {...register(id)}
                         type="checkbox"
                         id={id}
@@ -41,9 +41,10 @@ const Field = ({
                 </div>
                 {id === 'subscribe' && isChecked && (
                     <div
-                        style={{ marginTop: '30px', ...styles.fieldContainer }}
+                        className="fieldContainer"
+                        style={{ marginTop: '30px' }}
                     >
-                        <label style={{ ...styles.label }} htmlFor={'email'}>
+                        <label className="label" htmlFor={'email'}>
                             {'Email *'}
                         </label>
                         <input
@@ -55,12 +56,12 @@ const Field = ({
                                         'Please enter a valid email address.'
                                 }
                             })}
-                            style={{ ...styles.field }}
+                            className="field"
                             id="email"
                             type="email"
                             placeholder={'you@email.com'}
                         />
-                        <span style={{ ...styles.error }}>
+                        <span className="error">
                             {errors['email']?.message}
                         </span>
                     </div>
@@ -70,10 +71,10 @@ const Field = ({
     }
 
     return (
-        <div style={{ ...styles.fieldContainer }}>
+        <div className="fieldContainer">
             {type === 'text' && (
                 <>
-                    <label style={{ ...styles.label }} htmlFor={id}>
+                    <label className="label" htmlFor={id}>
                         {label} {required && '*'}
                     </label>
                     <input
@@ -86,25 +87,23 @@ const Field = ({
                                 message: `${label} must contain at least ${minLength} characters.`
                             }
                         })}
-                        style={{ ...styles.field }}
+                        className="field"
                         id={id}
                         type="text"
                         placeholder={placeholder}
                         defaultValue={value}
                     />
-                    <span style={{ ...styles.error }}>
-                        {errors[id]?.message}
-                    </span>
+                    <span className="error">{errors[id]?.message}</span>
                 </>
             )}
 
             {type === 'select' && (
                 <>
-                    <label style={{ ...styles.label }} htmlFor={id}>
+                    <label className="label" htmlFor={id}>
                         {label} {required && '*'}
                     </label>
                     <select
-                        style={{ ...styles.field }}
+                        className="field"
                         {...register(id, {
                             required:
                                 required &&
@@ -129,9 +128,7 @@ const Field = ({
                                 );
                             })}
                     </select>
-                    <span style={{ ...styles.error }}>
-                        {errors[id]?.message}
-                    </span>
+                    <span className="error">{errors[id]?.message}</span>
                 </>
             )}
         </div>

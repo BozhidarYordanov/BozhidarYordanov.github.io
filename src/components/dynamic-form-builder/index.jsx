@@ -1,15 +1,17 @@
-import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import Field from '../field';
-import { styles } from '../../theme/components/dynamic-form-builder';
+import Loader from '../Loader';
+import useFetchData from '../../hooks/use-fetch-data';
+import '../../theme/components/dynamicFormBuilder.css';
 
-const DynamicFormBuilder = ({ formJSON }) => {
-    const fields = formJSON[0].fields;
+const DynamicFormBuilder = () => {
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm();
+
+    const { data, loading } = useFetchData('/formData.json');
 
     const onSubmit = (data) => {
         const formatedData = Object.entries(data).map(([key, value]) => ({
@@ -17,33 +19,36 @@ const DynamicFormBuilder = ({ formJSON }) => {
         }));
         console.log(formatedData);
     };
-    return (
-        <div style={{ ...styles.formContainer }}>
-            <h1 style={{ ...styles.header }}>{`Let's get started!`}</h1>
 
-            <form
-                style={{ ...styles.form }}
-                onSubmit={handleSubmit(onSubmit)}
-                noValidate
-            >
-                {fields.map((field, index) => {
-                    return (
-                        <Field
-                            key={index}
-                            register={register}
-                            errors={errors}
-                            {...field}
-                        />
-                    );
-                })}
-                <button style={{ ...styles.button }}>{'Submit'}</button>
-            </form>
+    return (
+        <div className="wrapper">
+            <div className="formContainer">
+                <h1 className="header">{`Let's get started!`}</h1>
+
+                {loading ? (
+                    <Loader height={'450px'} />
+                ) : (
+                    <form
+                        className="form"
+                        onSubmit={handleSubmit(onSubmit)}
+                        noValidate
+                    >
+                        {data?.map((field, index) => {
+                            return (
+                                <Field
+                                    key={index}
+                                    register={register}
+                                    errors={errors}
+                                    {...field}
+                                />
+                            );
+                        })}
+                        <button className="button">{'Submit'}</button>
+                    </form>
+                )}
+            </div>
         </div>
     );
-};
-
-DynamicFormBuilder.propTypes = {
-    formJSON: PropTypes.array
 };
 
 export default DynamicFormBuilder;
