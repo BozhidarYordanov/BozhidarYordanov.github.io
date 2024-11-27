@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import Field from '../field';
-import Loader from '../Loader';
+import Loader from '../loader';
 import useFetchData from '../../hooks/use-fetch-data';
 import '../../theme/components/dynamicFormBuilder.css';
 
